@@ -10,11 +10,14 @@ units:
   tangent_distance_formula: (screw_size + 0.5) + tangent_distance
   tab_circle_formula: (screw_size + 0.5) + tab_circle_edge_thickness
   tab_circle_cutout_formula: (screw_size + 0.5)
-  foot_radius_formula: foot_radius - 1
 
 points:
   zones:
-    _:
+    origin:
+      key:
+        width: 0
+        height: 0
+        bind: [0, 0, 0, 0]
 
 outlines:
   plate_tab:
@@ -47,7 +50,8 @@ outlines:
           orient: -90
         - shift: [0, 0]
           orient: -tangent_angle
-
+        - ref: origin
+          affect: y
     - operation: subtract
       what: circle
       radius: foot_radius
@@ -61,7 +65,8 @@ outlines:
           orient: -90
         - shift: [-foot_radius, 0]
           orient: -90
-
+        - ref: origin
+          affect: y
     - operation: subtract
       what: circle
       radius: foot_radius
@@ -75,19 +80,47 @@ outlines:
           orient: -90
         - shift: [-foot_radius, 0]
           orient: 90
-
+        - ref: origin
+          affect: y
     - operation: add
       what: circle
       radius: tab_circle_formula
-      where:
-        - shift: [0, foot_radius]
       adjust:
         - shift: [0, foot_radius]
-
+        - shift: [-tab_circle_formula, 0]
+          orient: tangent_angle
+        - shift: [tangent_distance_formula, 0]
+          orient: -90
+        - shift: [-foot_radius, 0]
+          orient: 90
+        - ref: origin
+          affect: y
+        - shift: [0, foot_radius]
+          orient: -tangent_angle
+        - shift: [foot_radius, 0]
+          orient: tangent_angle
+        - shift: [tangent_distance_formula, 0]
+          orient: 90
+        - shift: [tab_circle_formula, 0]
+          orient: -90
     - operation: subtract
       what: circle
       radius: tab_circle_cutout_formula
-      where:
-        - shift: [0, foot_radius]
       adjust:
         - shift: [0, foot_radius]
+        - shift: [-tab_circle_formula, 0]
+          orient: tangent_angle
+        - shift: [tangent_distance_formula, 0]
+          orient: -90
+        - shift: [-foot_radius, 0]
+          orient: 90
+        - ref: origin
+          affect: y
+        - shift: [0, foot_radius]
+          orient: -tangent_angle
+        - shift: [foot_radius, 0]
+          orient: tangent_angle
+        - shift: [tangent_distance_formula, 0]
+          orient: 90
+        - shift: [tab_circle_formula, 0]
+          orient: -90
