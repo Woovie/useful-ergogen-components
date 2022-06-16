@@ -1,8 +1,8 @@
 units:
   # editable
-  angle: -15
+  tangent_angle: -15
   screw_size: 2.5
-  tangent_distance: 2.5
+  tangent_distance: 3
   tab_circle_edge_thickness: 3
   foot_radius: 3
   # editable
@@ -24,60 +24,70 @@ outlines:
         - shift: [0, 0]
         - shift: [0, foot_radius]
         - shift: [foot_radius, 0]
-          orient: angle
+          orient: tangent_angle
         - shift: [tangent_distance_formula, 0]
           orient: 90
         - shift: [tab_circle_formula, 0]
           orient: -90
         - shift: [tab_circle_formula, 0]
-          orient: -angle*2
+          orient: -tangent_angle*2
         - shift: [tangent_distance_formula, 0]
           orient: -90
         - shift: [foot_radius, 0]
           orient: 90
         - shift: [foot_radius, 0]
-          orient: angle - 90
+          orient: tangent_angle - 90
+      adjust:
+        - shift: [0, foot_radius]
+        - shift: [-foot_radius, 0]
+          orient: tangent_angle
+        - shift: [-tangent_distance_formula, 0]
+          orient: 90
+        - shift: [-tab_circle_formula, 0]
+          orient: -90
+        - shift: [0, 0]
+          orient: -tangent_angle
+
     - operation: subtract
       what: circle
       radius: foot_radius
       where:
         shift: [0, foot_radius]
+      adjust:
+        - shift: [0, foot_radius]
+        - shift: [tab_circle_formula, 0]
+          orient: -tangent_angle
+        - shift: [tangent_distance_formula, 0]
+          orient: -90
+        - shift: [-foot_radius, 0]
+          orient: -90
+
     - operation: subtract
       what: circle
       radius: foot_radius
       where:
+        shift: [0, foot_radius]
+      adjust:
         - shift: [0, foot_radius]
-        - shift: [foot_radius, 0]
-          orient: angle
-        - shift: [tangent_distance_formula, 0]
-          orient: 90
-        - shift: [tab_circle_formula, 0]
-          orient: -90
-        - shift: [tab_circle_formula, 0]
-          orient: -angle*2
+        - shift: [-tab_circle_formula, 0]
+          orient: tangent_angle
         - shift: [tangent_distance_formula, 0]
           orient: -90
-        - shift: [foot_radius, 0]
+        - shift: [-foot_radius, 0]
           orient: 90
+
     - operation: add
       what: circle
       radius: tab_circle_formula
       where:
         - shift: [0, foot_radius]
-        - shift: [foot_radius, 0]
-          orient: angle
-        - shift: [tangent_distance_formula, 0]
-          orient: 90
-        - shift: [tab_circle_formula, 0]
-          orient: -90
+      adjust:
+        - shift: [0, foot_radius]
+
     - operation: subtract
       what: circle
       radius: tab_circle_cutout_formula
       where:
         - shift: [0, foot_radius]
-        - shift: [foot_radius, 0]
-          orient: angle
-        - shift: [tangent_distance_formula, 0]
-          orient: 90
-        - shift: [tab_circle_formula, 0]
-          orient: -90
+      adjust:
+        - shift: [0, foot_radius]
