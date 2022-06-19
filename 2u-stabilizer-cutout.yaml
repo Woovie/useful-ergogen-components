@@ -1,0 +1,22 @@
+units:
+  u: U # Ensure we are using 19.05!
+
+  stabilizer_width: 7
+  stabilizer_height: 14
+  stabilizer_offset: -1 # This means south stabs, use `orient` to rotate them for north facing scenarios
+  stabilizer_spacing_2u: u / 2 + stabilizer_width / 2 + ((23.8 / 2) - (14 / 2) - (stabilizer_width / 2)) # The complex formula has two magic numbers. 14 is the size of a switch cutout for a plate. 23.8 is the distance between each stabilizer on a 2-2.75u stabilizer, as specified by Cherry
+
+outlines:
+  2u_stabilizer: # This creates the stabilizer, you just need to use its name in a `where` clause of another outline
+    - operation: stack
+      where: 2u_stabilizers # Set this tag on the keys you want
+      what: rectangle
+      size: [stabilizer_width, stabilizer_height]
+      adjust:
+        shift: [stabilizer_spacing_2u, stabilizer_offset]
+    - operation: stack
+      where: 2u_stabilizers
+      what: rectangle
+      size: [stabilizer_width, stabilizer_height]
+      adjust:
+        shift: [-stabilizer_spacing_2u, stabilizer_offset]
