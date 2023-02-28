@@ -13,11 +13,7 @@ units:
 
 points:
   zones:
-    origin: # Yes, this zone is necessary, ensure you include it!
-      key:
-        width: 0
-        height: 0
-        bind: [0, 0, 0, 0]
+    origin:
 
 outlines:
   plate_tab:
@@ -55,33 +51,35 @@ outlines:
     - operation: subtract
       what: circle
       radius: foot_radius
-      where:
-        shift: [0, foot_radius]
       adjust:
         - shift: [0, foot_radius]
-        - shift: [tab_circle_formula, 0]
-          orient: -tangent_angle
-        - shift: [tangent_distance_formula, 0]
-          orient: -90
         - shift: [-foot_radius, 0]
+          orient: tangent_angle
+        - shift: [-tangent_distance_formula, 0]
+          orient: 90
+        - shift: [-tab_circle_formula, 0]
           orient: -90
+        - shift: [0, 0]
+          orient: -tangent_angle
         - ref: origin
           affect: y
+        - shift: [0, foot_radius]
     - operation: subtract
       what: circle
       radius: foot_radius
-      where:
-        shift: [0, foot_radius]
       adjust:
         - shift: [0, foot_radius]
-        - shift: [-tab_circle_formula, 0]
+        - shift: [foot_radius, 0]
           orient: tangent_angle
         - shift: [tangent_distance_formula, 0]
-          orient: -90
-        - shift: [-foot_radius, 0]
           orient: 90
+        - shift: [tab_circle_formula, 0]
+          orient: -90
+        - shift: [0, 0]
+          orient: -tangent_angle
         - ref: origin
           affect: y
+        - shift: [0, foot_radius]
     - operation: add
       what: circle
       radius: tab_circle_formula
@@ -124,3 +122,8 @@ outlines:
           orient: 90
         - shift: [tab_circle_formula, 0]
           orient: -90
+    - operation: subtract
+      what: rectangle
+      size: [20, 15]
+      where:
+        shift: [0, -7.5]
